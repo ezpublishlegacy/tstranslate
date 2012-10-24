@@ -14,5 +14,8 @@ ExcludeList[]=kernel/user
 ExcludeList[]=design/ezwebin/user/login
 ExcludeList[]=design/ezwebin/user/edit
 
+#when TSCacheClean is enabled, cache will be cleared after translation file is updated
+TSCacheClean=enabled
+
 */
 ?>
