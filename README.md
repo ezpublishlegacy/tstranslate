@@ -23,6 +23,3 @@ BE AWARE:
    
 To enable edit mode hit CTRL + ALT + t
 
-List of remaining tasks to look at:
-
-* Error page - error messages raised by set.php should be displayed to editor
