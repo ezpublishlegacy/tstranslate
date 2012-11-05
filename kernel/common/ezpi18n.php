@@ -131,12 +131,12 @@ class ezpI18n
         $man = eZTranslatorManager::instance();
         $trans = $man->translate( $context, $source, $comment );
 
-        // MWTRANSLATE HACK START
+        // TSTRANSLATE HACK START
         if ( $trans !== null )
         {
             $translation = self::insertArguments( $trans, $arguments );
 
-            $ini = eZINI::instance( 'mwtranslate.ini' );
+            $ini = eZINI::instance( 'tstranslate.ini' );
             $enabled = $ini->variable( 'TSTranslateSettings', 'TSTranslate' ) == 'enabled';
             if ( $enabled )
             {
@@ -175,7 +175,7 @@ class ezpI18n
 
             return $translation;
         }
-        // MWTRANSLATE HACK END
+        // TSTRANSLATE HACK END
 
         if ( $comment != null and strlen( $comment ) > 0 )
             eZDebug::writeDebug( "Missing translation for message in context: '$context' with comment: '$comment'. The untranslated message is: '$source'", __METHOD__ );

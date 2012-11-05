@@ -103,7 +103,7 @@ if ( $http->hasPostVariable( 'Translation' ) )
     {
         // Input is validated. Get translations filename, and read the XML
         $localeCode = eZLocale::instance()->localeFullCode();
-        $ini = eZINI::instance( 'mwtranslate.ini' );
+        $ini = eZINI::instance( 'tstranslate.ini' );
         $translations_folder = $ini->variable( 'TSTranslateSettings', 'TranslationsFolder' );
         $folder_array = explode( '/', $translations_folder );
         $folder_array[] = $localeCode;
