@@ -20,7 +20,7 @@
     </style>
     {/literal}
     <div id="untranslatedDiv">
-        <p>{"These strings can not be translated inline because they may mangle the HTML code. They will have effect on the page you are looking at though"|i18n( "makingwaves/tstranslate" )}.</p>
+        <p>{"These strings can not be translated inline because they may mangle the HTML code. They will have effect on the page you are looking at though."|i18n( "makingwaves/tstranslate" )}</p>
         {foreach $tsTranslatedExcluded as $t}
             <div class="tstranslate_exception">
                 <span class="ts-translated-text" alt="{$t.context}" title="{$t.source}" original="{$t.original}" translation="{$t.translation}">{$t.translation}</span>
