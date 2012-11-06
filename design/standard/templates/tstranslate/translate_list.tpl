@@ -9,18 +9,19 @@
             background-color: #383838;
             overflow: auto;
             max-height: 500px;
+            padding: 5px;
         }
         #untranslatedDiv p{
             color: white;
         }
         .tstranslate_exception{
-            padding: 5px;
+            padding: 5px 0;
             color: white;
         }
     </style>
     {/literal}
     <div id="untranslatedDiv">
-        <p>{"These strings can not be translated inline because they may mangle the HTML code. They will have effect on the page you are looking at though"|i18n( "makingwaves/tstranslate" )}.</p>
+        <p>{"The following strings can not be translated inline because they may mangle the HTML code. They will have effect on the page you are looking at though."|i18n( "makingwaves/tstranslate" )}</p>
         {foreach $tsTranslatedExcluded as $t}
             <div class="tstranslate_exception">
                 <span class="ts-translated-text" alt="{$t.context}" title="{$t.source}" original="{$t.original}" translation="{$t.translation}">{$t.translation}</span>
