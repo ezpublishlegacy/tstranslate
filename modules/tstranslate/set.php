@@ -85,7 +85,7 @@ function addNewContext( DOMDocument $doc, $context )
     $rootNode = $doc->documentElement;
     $rootNode->appendChild( $context_node );
     $context_node->appendChild( $name_node );
-    
+
     return $context_node;
 }
 

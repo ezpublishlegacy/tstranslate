@@ -1,8 +1,8 @@
-$(document).ready( function(){
+$(document).ready( function() {
     var isCtrl = false;
     var isAlt = false;
     $(document).data('translationSwitcherOn',false);
-    
+
     $(document).keyup(function(e) {
         if(e.which == 17) {
             isCtrl = false;
@@ -24,10 +24,10 @@ $(document).ready( function(){
             if (!$(document).data('translationSwitcherOn')){
                 $(document).data('translationSwitcherOn',true);    
                 $("#untranslatedDiv").show();
-                
+
                 $(".ts-translated-text").css( 'background', 'red' );
-                    
-                $(".ts-translated-text").on( 'click', function(){
+
+                $(".ts-translated-text").on( 'click', function() {
                     var _tstranslatedtext = $(this);
                     if (!_tstranslatedtext.data('editMode')){
                         _tstranslatedtext.data('editMode',true);
@@ -42,9 +42,8 @@ $(document).ready( function(){
                             _token = _tokenNode.getAttribute( 'title' );
                         }
 
-
                         var action = $("#mw_ezurl").val() == "/" ? "" : $("#mw_ezurl").val();
-                        
+
                         this.innerHTML = "<form action=\"" + action + "/tstranslate/set\" method=\"POST\" >" + 
                         '<input type="hidden" name="ezxform_token" value="' + _token + '" />' +
                         '<input type="hidden" name="Context" value="' + context + '" />' +
@@ -60,16 +59,15 @@ $(document).ready( function(){
                             trans_span.data('editMode',false);
                         });
                     }
-                        
                 });
                 return false;
             }
-            else{
+            else {
                 $(document).data('translationSwitcherOn',false);
                 $("#untranslatedDiv").hide();
-                $(".ts-translated-text").each(function(){
+                $(".ts-translated-text").each(function() {
                     var _tstranslatedtext = $(this);
-                    if ($(this).find('.ts-translate-cancel-button').length > 0){
+                    if ($(this).find('.ts-translate-cancel-button').length > 0) {
                         var trans_span = _tstranslatedtext;
                         trans_span.html( trans_span.attr( 'translation' ) );
                         trans_span.data('editMode',false);
@@ -77,9 +75,8 @@ $(document).ready( function(){
                 });
                 $(".ts-translated-text").off('click');
                 $(".ts-translated-text").css( 'background', background );
-                e.preventDefault();    
+                e.preventDefault();
             }
         }
     });
 });
-

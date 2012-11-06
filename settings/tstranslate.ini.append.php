@@ -11,16 +11,18 @@ TranslationsFolder=share/translations/
 # List of context names (and optionally single strings) to be excluded from inline translation
 # ExcludeList[]=<context>[;<translationstring>]
 ExcludeList[]
-ExcludeList[]=design/ezwebin/link
-ExcludeList[]=design/standard/parts/website_toolbar
-ExcludeList[]=design/ezwebin/pagelayout
-ExcludeList[]=design/admin/pagelayout
 ExcludeList[]=kernel/user
 ExcludeList[]=kernel/cache
+ExcludeList[]=kernel/content
+ExcludeList[]=design/standard/parts/website_toolbar
+ExcludeList[]=design/ezwebin/link
+ExcludeList[]=design/ezwebin/pagelayout
+ExcludeList[]=design/admin/pagelayout
 ExcludeList[]=design/standard/pagelayout
 ExcludeList[]=design/ezwebin/user/login
 ExcludeList[]=design/ezwebin/user/edit
-ExcludeList[]=kernel/cache
+ExcludeList[]=design/ezwebin/content/search;Search
+ExcludeList[]=extension/ezstarrating/datatype
 
 # Enable or disable clearing cache after translation file is updated
 TSCacheClean=enabled
