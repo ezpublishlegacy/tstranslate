@@ -149,13 +149,13 @@ class ezpI18n
                     {
                         if ( !isset( $string ) || $string == $source )
                         {
-                            if ( !isset( $_SESSION["ts-translated-excluded"] ) )
+                            if ( !isset( $_SESSION["ts-translate-excluded"] ) )
                             {
-                                $_SESSION["ts-translated-excluded"] = array();
+                                $_SESSION["ts-translate-excluded"] = array();
                             }
-                            if ( !isset( $_SESSION["ts-translated-excluded"][hash( 'md5', $source )] ) )
+                            if ( !isset( $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] ) )
                             {
-                                $_SESSION["ts-translated-excluded"][hash( 'md5', $source )] = array("source" => $source,
+                                $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] = array("source" => $source,
                                                             "original" => $trans,
                                                             "translation" => $translation, 
                                                             "context" => $context,

@@ -42,7 +42,7 @@ $(document).ready( function() {
                             _token = _tokenNode.getAttribute( 'title' );
                         }
 
-                        var action = $("#mw_ezurl").val() == "/" ? "" : $("#mw_ezurl").val();
+                        var action = $("#tstranslate_ezurl").val() == "/" ? "" : $("#tstranslate_ezurl").val();
 
                         this.innerHTML = "<form action=\"" + action + "/tstranslate/set\" method=\"POST\" >" + 
                         '<input type="hidden" name="ezxform_token" value="' + _token + '" />' +
