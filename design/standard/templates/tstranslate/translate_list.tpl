@@ -5,7 +5,7 @@
     {if gt( $tsTranslateExcluded|count(), 0)}
         {literal}
         <style type="text/css">
-            #untranslatedDiv{
+            #tstranslate_untranslatable_strings {
                 display: none;
                 width: 100%;
                 background-color: #383838;
@@ -13,21 +13,23 @@
                 max-height: 500px;
                 padding: 5px;
             }
-            #untranslatedDiv p{
+            #tstranslate_untranslatable_strings {
                 color: white;
             }
-            .tstranslate_exception{
+            .tstranslate_exception {
                 padding: 5px 0;
-                color: white;
+            }
+            .tstranslate_exception .ts-translation-context {
+                font-size: small;
             }
         </style>
         {/literal}
-        <div id="untranslatedDiv">
+        <div id="tstranslate_untranslatable_strings">
             <p>{"The following strings can not be translated inline because they may mangle the HTML code. They will have effect on the page you are looking at though."|i18n( "makingwaves/tstranslate" )}</p>
             {foreach $tsTranslateExcluded as $t}
                 <div class="tstranslate_exception">
                     <span class="ts-translated-text" alt="{$t.context}" title="{$t.source}" original="{$t.original}" translation="{$t.translation|wash()}">{$t.translation}</span>
-                    (Section: {$t.context} {if $t.comment|ne( '' )}, comment: {$t.comment}{/if})
+                    <span class="ts-translation-context">[Context: {$t.context} {if $t.comment|ne( '' )}, comment: {$t.comment}{/if}]</span>
                 </div>
             {/foreach}
         </div>

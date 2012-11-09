@@ -23,7 +23,7 @@ $(document).ready( function() {
             var background = $(".ts-translated-text").css( 'background' );            
             if (!$(document).data('translationSwitcherOn')){
                 $(document).data('translationSwitcherOn',true);    
-                $("#untranslatedDiv").show();
+                $("#tstranslate_untranslatable_strings").show();
 
                 $(".ts-translated-text").css( 'background', 'red' );
 
@@ -44,7 +44,7 @@ $(document).ready( function() {
 
                         var action = $("#tstranslate_ezurl").val() == "/" ? "" : $("#tstranslate_ezurl").val();
 
-                        this.innerHTML = "<form action=\"" + action + "/tstranslate/set\" method=\"POST\" >" + 
+                        this.innerHTML = "<form action=\"" + action + "/tstranslate/set\" method=\"POST\" style=\"display: inline\" >" + 
                         '<input type="hidden" name="ezxform_token" value="' + _token + '" />' +
                         '<input type="hidden" name="Context" value="' + context + '" />' +
                         '<input type="hidden" name="Source" value="' + source + '" />' +
@@ -64,7 +64,7 @@ $(document).ready( function() {
             }
             else {
                 $(document).data('translationSwitcherOn',false);
-                $("#untranslatedDiv").hide();
+                $(".tstranslate_untranslatable_strings").hide();
                 $(".ts-translated-text").each(function() {
                     var _tstranslatedtext = $(this);
                     if ($(this).find('.ts-translate-cancel-button').length > 0) {
