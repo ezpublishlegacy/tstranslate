@@ -132,7 +132,9 @@ class ezpI18n
         $trans = $man->translate( $context, $source, $comment );
 
         // TSTRANSLATE HACK START
-        if ( $trans !== null )
+        $has_access = eZFunctionHandler::execute( 'user', 'has_access_to', array( 'module' => 'tstranslate',
+                                                                                  'view' => 'set' ) );
+        if ( $trans !== null AND $has_access )
         {
             $translation = self::insertArguments( $trans, $arguments );
 
