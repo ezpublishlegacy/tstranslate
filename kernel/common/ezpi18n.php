@@ -132,46 +132,48 @@ class ezpI18n
         $trans = $man->translate( $context, $source, $comment );
 
         // TSTRANSLATE HACK START
-        $has_access = eZFunctionHandler::execute( 'user', 'has_access_to', array( 'module' => 'tstranslate',
-                                                                                  'view' => 'set' ) );
-        if ( $trans !== null AND $has_access )
+        if ( $trans !== null )
         {
             $translation = self::insertArguments( $trans, $arguments );
-
-            $ini = eZINI::instance( 'tstranslate.ini' );
-            $enabled = $ini->variable( 'TSTranslateSettings', 'TSTranslate' ) == 'enabled';
-            if ( $enabled )
+            $has_access = eZFunctionHandler::execute( 'user', 'has_access_to', array( 'module' => 'tstranslate',
+                                                                                      'view' => 'set' ) );
+            if ( $has_access )
             {
-                $exclude_list = $ini->variable( 'TSTranslateSettings', 'ExcludeList' );
-                $excluded = false;
-                foreach ( $exclude_list as $e )
+                $ini = eZINI::instance( 'tstranslate.ini' );
+                $enabled = $ini->variable( 'TSTranslateSettings', 'TSTranslate' ) == 'enabled';
+                if ( $enabled )
                 {
-                    list( $section, $string ) = (sizeof(explode( ";", $e )) > 1 ? explode( ";", $e ) : array($e,null));
-                    if ( $section == $context )
+                    $exclude_list = $ini->variable( 'TSTranslateSettings', 'ExcludeList' );
+                    $excluded = false;
+                    foreach ( $exclude_list as $e )
                     {
-                        if ( !isset( $string ) || $string == $source )
+                        list( $section, $string ) = (sizeof(explode( ";", $e )) > 1 ? explode( ";", $e ) : array($e,null));
+                        if ( $section == $context )
                         {
-                            if ( !isset( $_SESSION["ts-translate-excluded"] ) )
+                            if ( !isset( $string ) || $string == $source )
                             {
-                                $_SESSION["ts-translate-excluded"] = array();
+                                if ( !isset( $_SESSION["ts-translate-excluded"] ) )
+                                {
+                                    $_SESSION["ts-translate-excluded"] = array();
+                                }
+                                if ( !isset( $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] ) )
+                                {
+                                    $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] = array("source" => $source,
+                                                                "original" => $trans,
+                                                                "translation" => $translation, 
+                                                                "context" => $context,
+                                                                "comment" => $comment);
+                                }
+                                $excluded = true;
+                                break;
                             }
-                            if ( !isset( $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] ) )
-                            {
-                                $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] = array("source" => $source,
-                                                            "original" => $trans,
-                                                            "translation" => $translation, 
-                                                            "context" => $context,
-                                                            "comment" => $comment);
-                            }
-                            $excluded = true;
-                            break;
                         }
                     }
-                }
 
-                if ( !$excluded )
-                {
-                    $translation = "<span class=\"ts-translated-text\" alt=\"$context\" title=\"$source\" original=\"$trans\" translation=\"$translation\">$translation</span>";
+                    if ( !$excluded )
+                    {
+                        $translation = "<span class=\"ts-translated-text\" alt=\"$context\" title=\"$source\" original=\"$trans\" translation=\"$translation\">$translation</span>";
+                    }
                 }
             }
 
