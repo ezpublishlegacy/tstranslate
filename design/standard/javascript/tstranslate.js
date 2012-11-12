@@ -64,7 +64,7 @@ $(document).ready( function() {
             }
             else {
                 $(document).data('translationSwitcherOn',false);
-                $(".tstranslate_untranslatable_strings").hide();
+                $("#tstranslate_untranslatable_strings").hide();
                 $(".ts-translated-text").each(function() {
                     var _tstranslatedtext = $(this);
                     if ($(this).find('.ts-translate-cancel-button').length > 0) {
