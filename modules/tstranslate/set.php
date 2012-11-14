@@ -153,7 +153,7 @@ if ( $http->hasPostVariable( 'Translation' ) )
                     //cache clearing
                     if ( $ini->variable( 'TSTranslateSettings', 'TSCacheClean' ) == "enabled" )
                     {
-                        eZCache::clearByID( array("content", "template") );
+                        eZCache::clearByID( array( 'content', 'template', 'template-block', 'template-override' ) );
                     }
 
                     //clearing this array as it must be rebuilded

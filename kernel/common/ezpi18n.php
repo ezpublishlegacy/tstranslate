@@ -136,7 +136,7 @@ class ezpI18n
         {
             $translation = self::insertArguments( $trans, $arguments );
             $has_access = eZFunctionHandler::execute( 'user', 'has_access_to', array( 'module' => 'tstranslate',
-                                                                                      'view' => 'set' ) );
+                                                                                      'function' => 'set' ) );
             if ( $has_access )
             {
                 $ini = eZINI::instance( 'tstranslate.ini' );
