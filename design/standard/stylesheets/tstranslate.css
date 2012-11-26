@@ -4,16 +4,13 @@
     overflow: auto;
     max-height: 500px;
     padding: 5px;
-}
-
-#tstranslate_untranslatable_strings {
     color: white;
 }
 
-.tstranslate_exception {
-    padding: 5px 0;
-}
+    #tstranslate_untranslatable_strings .tstranslate_exception {
+        padding: 5px 0;
+    }
 
-.tstranslate_exception .ts-translation-context {
-    font-size: small;
-}
+        #tstranslate_untranslatable_strings .tstranslate_exception .ts-translation-context {
+            font-size: small;
+        }
