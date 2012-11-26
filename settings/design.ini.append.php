@@ -3,7 +3,4 @@
 [ExtensionSettings]
 DesignExtensions[]=tstranslate
 
-[JavaScriptSettings]
-FrontendJavaScriptList[]=tstranslate.js
-
 */ ?>

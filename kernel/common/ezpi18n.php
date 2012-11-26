@@ -135,45 +135,41 @@ class ezpI18n
         if ( $trans !== null )
         {
             $translation = self::insertArguments( $trans, $arguments );
-            $has_access = eZFunctionHandler::execute( 'user', 'has_access_to', array( 'module' => 'tstranslate',
-                                                                                      'function' => 'write' ) );
-            if ( $has_access )
+
+            $ini = eZINI::instance( 'tstranslate.ini' );
+            $enabled = $ini->variable( 'TSTranslateSettings', 'TSTranslate' ) == 'enabled';
+            if ( $enabled )
             {
-                $ini = eZINI::instance( 'tstranslate.ini' );
-                $enabled = $ini->variable( 'TSTranslateSettings', 'TSTranslate' ) == 'enabled';
-                if ( $enabled )
+                $exclude_list = $ini->variable( 'TSTranslateSettings', 'ExcludeList' );
+                $excluded = false;
+                foreach ( $exclude_list as $e )
                 {
-                    $exclude_list = $ini->variable( 'TSTranslateSettings', 'ExcludeList' );
-                    $excluded = false;
-                    foreach ( $exclude_list as $e )
+                    list( $section, $string ) = (sizeof(explode( ";", $e )) > 1 ? explode( ";", $e ) : array($e,null));
+                    if ( $section == $context )
                     {
-                        list( $section, $string ) = (sizeof(explode( ";", $e )) > 1 ? explode( ";", $e ) : array($e,null));
-                        if ( $section == $context )
+                        if ( !isset( $string ) || $string == $source )
                         {
-                            if ( !isset( $string ) || $string == $source )
+                            if ( !isset( $_SESSION["ts-translate-excluded"] ) )
                             {
-                                if ( !isset( $_SESSION["ts-translate-excluded"] ) )
-                                {
-                                    $_SESSION["ts-translate-excluded"] = array();
-                                }
-                                if ( !isset( $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] ) )
-                                {
-                                    $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] = array("source" => $source,
-                                                                "original" => $trans,
-                                                                "translation" => $translation, 
-                                                                "context" => $context,
-                                                                "comment" => $comment);
-                                }
-                                $excluded = true;
-                                break;
+                                $_SESSION["ts-translate-excluded"] = array();
                             }
+                            if ( !isset( $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] ) )
+                            {
+                                $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] = array("source" => $source,
+                                                            "original" => $trans,
+                                                            "translation" => $translation, 
+                                                            "context" => $context,
+                                                            "comment" => $comment);
+                            }
+                            $excluded = true;
+                            break;
                         }
                     }
+                }
 
-                    if ( !$excluded )
-                    {
-                        $translation = "<span class=\"ts-translated-text\" alt=\"$context\" title=\"$source\" original=\"$trans\" translation=\"$translation\">$translation</span>";
-                    }
+                if ( !$excluded )
+                {
+                    $translation = "<span class=\"ts-translated-text\" alt=\"$context\" title=\"$source\" original=\"$trans\" translation=\"$translation\">$translation</span>";
                 }
             }
 
