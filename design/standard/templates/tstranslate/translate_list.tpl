@@ -7,28 +7,9 @@
 
         {def $tsTranslateExcluded = ezhttp( 'ts-translate-excluded' , 'session' )}
         {if gt( $tsTranslateExcluded|count(), 0)}
-            {literal}
-            <style type="text/css">
-                #tstranslate_untranslatable_strings {
-                    display: none;
-                    width: 100%;
-                    background-color: #383838;
-                    overflow: auto;
-                    max-height: 500px;
-                    padding: 5px;
-                }
-                #tstranslate_untranslatable_strings {
-                    color: white;
-                }
-                .tstranslate_exception {
-                    padding: 5px 0;
-                }
-                .tstranslate_exception .ts-translation-context {
-                    font-size: small;
-                }
-            </style>
-            {/literal}
-            <div id="tstranslate_untranslatable_strings">
+            {ezcss_require( 'tstranslate.css' )}
+
+            <div id="tstranslate_untranslatable_strings" style="display: none;">
                 <p>{"The following strings can not be translated inline because they may mangle the HTML code. They will have effect on the page you are looking at though."|i18n( "makingwaves/tstranslate" )}</p>
                 {foreach $tsTranslateExcluded as $t}
                     <div class="tstranslate_exception">

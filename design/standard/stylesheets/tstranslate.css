@@ -1,0 +1,19 @@
+#tstranslate_untranslatable_strings {
+    width: 100%;
+    background-color: #383838;
+    overflow: auto;
+    max-height: 500px;
+    padding: 5px;
+}
+
+#tstranslate_untranslatable_strings {
+    color: white;
+}
+
+.tstranslate_exception {
+    padding: 5px 0;
+}
+
+.tstranslate_exception .ts-translation-context {
+    font-size: small;
+}
