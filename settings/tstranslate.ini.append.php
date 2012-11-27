@@ -12,7 +12,6 @@ TranslationsFolder=share/translations/
 # ExcludeList[]=<context>[;<translationstring>]
 ExcludeList[]
 ExcludeList[]=kernel/user
-ExcludeList[]=kernel/cache
 ExcludeList[]=kernel/content
 ExcludeList[]=kernel/state
 ExcludeList[]=design/standard/parts/website_toolbar

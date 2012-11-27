@@ -124,7 +124,7 @@ if ( $http->hasPostVariable( 'Translation' ) )
                         $context_node = addNewContext( $doc, $context );
                     }
                     
-                    //check if adding new context node went fine
+                    // Check if adding new context node went fine
                     if ( !$context_node )
                     {
                         eZDebug::writeError( "There was an error while adding new '$context' context  to xml file", MODULE_NAME );
@@ -150,19 +150,7 @@ if ( $http->hasPostVariable( 'Translation' ) )
                         return $Module->handleError( eZError::KERNEL_NOT_AVAILABLE, 'kernel' );
                     }
 
-                    //cache clearing
-                    if ( $ini->variable( 'TSTranslateSettings', 'TSCacheClean' ) == "enabled" )
-                    {
-                        eZCache::clearByID( array( 'content', 'template', 'template-block', 'template-override' ) );
-                    }
-
-                    //clearing this array as it must be rebuilded
-                    if ( isset( $_SESSION["ts-translated-excluded"] ) )
-                    {
-                        unset( $_SESSION["ts-translated-excluded"] );
-                    }
                     $http->redirect( $http->sessionVariable( 'LastAccessesURI' ) );
-                   
                 }
                 else
                 {
