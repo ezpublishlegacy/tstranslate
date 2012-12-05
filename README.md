@@ -1,6 +1,10 @@
 tstranslate
 ===========
 
+Requirements:
+* eZ Publish version 4.5 and up; tested on 4.7
+* jQuery version <something>; tested on 1.7.2, 1.5.1
+
 Installation:
 
 1. Put tstranslate extension code into <ezRoot>/extension/tstranslate/
@@ -26,7 +30,13 @@ Installation:
      You can specify a whole context by it's name, or a single string on the format "&lt;context name&gt;;&lt;string&gt;"  
 
 BE AWARE:  
-   Every update of translation file will clear a bunch of caches (all template cache),
+   Every page view by users with access to tstranslate will clear a bunch of caches (all template cache and content view cache),
    so it is not recommended to use this functionality on production server.
    
 To enable edit mode hit CTRL + ALT + t.
+
+
+TODO:
+* Make shortcut keys configurable
+* Make texts inside links be editable inline (need to disable the original link)
+* Make it work for versions earlier than 4.5? (requires a content read workflow solution to replace event listener)
