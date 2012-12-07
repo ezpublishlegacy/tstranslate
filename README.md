@@ -38,5 +38,4 @@ To enable edit mode hit CTRL + ALT + t.
 
 TODO:
 * Make shortcut keys configurable
-* Make texts inside links be editable inline (need to disable the original link)
-* Make it work for versions earlier than 4.5? (requires a content read workflow solution to replace event listener)
+* Make it work for versions earlier than 4.5? (requires a content read workflow solution or similar to replace event listener)
