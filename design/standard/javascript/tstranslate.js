@@ -1,7 +1,7 @@
 $(document).ready( function() {
     $(document).data('translationSwitcherOn',false);
 
-    $(document).on('keyup', function(e) {
+    $(document).keyup( function(e) {
         //84 is a code for letter t
         if(e.keyCode == 84 && e.altKey && e.ctrlKey) {
             if (!$(document).data('translationSwitcherOn')){
