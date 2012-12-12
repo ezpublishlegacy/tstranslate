@@ -1,11 +1,28 @@
 tstranslate
 ===========
 
-Requirements:
-* eZ Publish version 4.5 and up; tested on 4.7
+Description
+-----------
+
+Will let you make translations on strings in translations files directly,
+inline in your frontend web pages.
+
+Makes it simple for editors to do translations, by the hit of a shortcut key,
+and instantly see where the translations strings fit in the website.
+
+When the editor press **Ctrl - Alt - t** while on a page, all translations strings
+on that page will light up with a red background color. Click on one of these,
+and you get an input box to translate the string.
+
+
+Requirements
+------------
+
+* eZ Publish version 4.5 to 4.7; not tested on 5.x!
 * jQuery version <something>; tested on 1.7.2, 1.5.1
 
-Installation:
+Installation
+------------
 
 1. Put tstranslate extension code into <ezRoot>/extension/tstranslate/
 2. Add ActiveAccessExtensions[]=tstranslate in your frontend siteaccesses site.ini.append.php  
@@ -29,13 +46,20 @@ Installation:
      for instance button texts etc.  
      You can specify a whole context by it's name, or a single string on the format "&lt;context name&gt;;&lt;string&gt;"  
 
-BE AWARE:  
-   Every page view by users with access to tstranslate will clear a bunch of caches (all template cache and content view cache),
-   so it is not recommended to use this functionality on production server.
-   
-To enable edit mode hit CTRL + ALT + t.
+BE AWARE
+--------
+
+Every page view by users with access to tstranslate will clear a bunch of caches (all template cache and content view cache),
+so it is not recommended to use this functionality on production server.
+
+Your translations files should start with the xml tag specifying utf-8, something like this:
+<?xml version="1.0" encoding="utf-8"?>
+If not, php will transform the utf-8 characters to numeric entities.
 
 
-TODO:
-* Make shortcut keys configurable
+TODO
+----
+
+* Make shortcut keys and background color configurable
 * Make it work for versions earlier than 4.5? (requires a content read workflow solution or similar to replace event listener)
+* Test on eZ Publish 5.0
