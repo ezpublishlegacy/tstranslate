@@ -53,7 +53,7 @@ Every page view by users with access to tstranslate will clear a bunch of caches
 so it is not recommended to use this functionality on production server.
 
 Your translations files should start with the xml tag specifying utf-8, something like this:  
-    <?xml version="1.0" encoding="utf-8"?>
+    <?xml version="1.0" encoding="utf-8"?>  
 If not, php will transform the utf-8 characters to numeric entities.
 
 
@@ -67,7 +67,7 @@ TODO
 Authors
 -------
 
-Idea, proof of concept and development: Arne Bakkebø
-Development: Tomasz Madeyski
+Idea, proof of concept and development: Arne Bakkebø  
+Development: Tomasz Madeyski  
 
 For Making Waves, http://www.makingwaves.no
