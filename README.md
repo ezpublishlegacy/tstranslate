@@ -26,17 +26,17 @@ Installation
 
 1. Put tstranslate extension code into <ezRoot>/extension/tstranslate/
 2. Add ActiveAccessExtensions[]=tstranslate in your frontend siteaccesses site.ini.append.php  
-   Do not use ActiveExtensions[], since the settings will not be overriden correctly
+   Do not use ActiveExtensions[], since the settings will not be overriden correctly  
 3. Modify file <ezRoot>/config.php (or copy from config.php-RECOMMENDED) and add line:  
    define( 'EZP_AUTOLOAD_ALLOW_KERNEL_OVERRIDE', true );  
    This is because TS Translate requires a kernel hack to work.  
    Class ezpI18n will be overridden. The included class is from eZ Publish 4.7.  
-   The changed section in this class is clearly defined in the source code, to facilitate easier upgrade.
-4. Then run the autoload update scripts like this:
-   php bin/php/ezpgenerateautoloads.php -o
-   php bin/php/ezpgenerateautoloads.php -e
-5. Include template translate_list.tpl at the bottom of your pagelayout.tpl template (after all translation strings have been displayed):
-   {include uri='design:tstranslate/translate_list.tpl'}
+   The changed section in this class is clearly defined in the source code, to facilitate easier upgrade.  
+4. Then run the autoload update scripts like this:  
+   php bin/php/ezpgenerateautoloads.php -o  
+   php bin/php/ezpgenerateautoloads.php -e  
+5. Include template translate_list.tpl at the bottom of your pagelayout.tpl template (after all translation strings have been displayed):  
+   {include uri='design:tstranslate/translate_list.tpl'}  
 6. Override tstranslate.ini.append.php in your frontend siteaccesses, and set the following parameters in [TSTranslateSettings]:  
    * TSTranslate=enabled  
    * TranslationsFolder, specify the folder of the translations files that should be editable, typically:  
