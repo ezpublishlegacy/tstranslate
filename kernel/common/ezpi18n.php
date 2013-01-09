@@ -132,12 +132,16 @@ class ezpI18n
         $trans = $man->translate( $context, $source, $comment );
 
         // TSTRANSLATE HACK START
-        if ( $trans !== null )
+        $ini = eZINI::instance( 'tstranslate.ini' );
+        $enabled = $ini->variable( 'TSTranslateSettings', 'TSTranslate' ) == 'enabled';
+        if ( $trans !== null || $enabled )
         {
+            if ( $trans === null )
+            {
+                $trans = $source;
+            }
             $translation = self::insertArguments( $trans, $arguments );
 
-            $ini = eZINI::instance( 'tstranslate.ini' );
-            $enabled = $ini->variable( 'TSTranslateSettings', 'TSTranslate' ) == 'enabled';
             if ( $enabled )
             {
                 $has_access = eZFunctionHandler::execute( 'user', 'has_access_to', array( 'module' => 'tstranslate',

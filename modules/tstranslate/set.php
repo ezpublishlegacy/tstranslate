@@ -113,6 +113,7 @@ if ( $http->hasPostVariable( 'Translation' ) )
         {
             $doc = new DOMDocument( '1.0', 'utf-8' );
             $success = $doc->load( $translation_filename );
+
             if ( $success )
             {
                 if ( eZTSTranslator::validateDOMTree( $doc ) )
@@ -143,14 +144,18 @@ if ( $http->hasPostVariable( 'Translation' ) )
                     }
 
                     // Store changes in translations file
-                    $xml = $doc->saveXML();
-                    if ( !file_put_contents( $translation_filename, $xml ) )
+                    $doc->encoding = 'utf-8';
+                    $doc->formatOutput = true;
+                    $result = $doc->save( $translation_filename, LIBXML_NOEMPTYTAG );
+                    if ( $result === false )
                     {
                         eZDebug::writeError( "Could not store xml in file '$translation_filename'", MODULE_NAME );
                         return $Module->handleError( eZError::KERNEL_NOT_AVAILABLE, 'kernel' );
                     }
 
-                    $http->redirect( $http->sessionVariable( 'LastAccessesURI' ) );
+                    $url = $http->sessionVariable( 'LastAccessesURI' );
+                    eZURI::transformURI( $url );
+                    $http->redirect( $url );
                 }
                 else
                 {
