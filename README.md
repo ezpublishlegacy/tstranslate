@@ -18,7 +18,7 @@ and you get an input box to translate the string.
 Requirements
 ------------
 
-* eZ Publish version 4.5 to 4.7; not tested on 5.x!
+* eZ Publish version 4.5 to 4.7 (eZ Publish 5.x are currently not supported)
 * jQuery tested on version 1.7.2, 1.5.1
 
 Installation
@@ -51,10 +51,6 @@ BE AWARE
 
 Every page view by users with access to tstranslate will clear a bunch of caches (all template cache and content view cache),
 so it is not recommended to use this functionality on production server.
-
-Your translations files should start with the xml tag specifying utf-8, something like this:  
-    <?xml version="1.0" encoding="utf-8"?>  
-If not, php will transform the utf-8 characters to numeric entities.
 
 
 TODO
