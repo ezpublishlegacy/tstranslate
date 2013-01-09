@@ -150,7 +150,9 @@ if ( $http->hasPostVariable( 'Translation' ) )
                         return $Module->handleError( eZError::KERNEL_NOT_AVAILABLE, 'kernel' );
                     }
 
-                    $http->redirect( $http->sessionVariable( 'LastAccessesURI' ) );
+                    $url = $http->sessionVariable( 'LastAccessesURI' );
+                    eZURI::transformURI( $url );
+                    $http->redirect( $url );
                 }
                 else
                 {
