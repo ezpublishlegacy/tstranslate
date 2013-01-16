@@ -163,11 +163,11 @@ class ezpI18n
                                 }
                                 if ( !isset( $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] ) )
                                 {
-                                    $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] = array("source" => htmlentities( $source ),
-                                                                "original" => htmlentities( $trans ),
-                                                                "translation" => htmlentities( $translation ), 
+                                    $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] = array("source" => $source,
+                                                                "original" => $trans,
+                                                                "translation" => $translation, 
                                                                 "context" => $context,
-                                                                "comment" => htmlentities( $comment ) );
+                                                                "comment" => $comment);
                                 }
                                 $excluded = true;
                                 break;
@@ -177,7 +177,7 @@ class ezpI18n
 
                     if ( !$excluded )
                     {
-                        $translation = '<span class="ts-translated-text" alt="' . $context . '" title="' . htmlentities( $source ) . '" original="' . htmlentities( $trans ) . '" translation="' . htmlentities( $translation ) . '">' . $translation . '</span>';
+                        $translation = "<span class=\"ts-translated-text\" alt=\"$context\" title=\"$source\" original=\"$trans\" translation=\"$translation\">$translation</span>";
                     }
                 }
             }

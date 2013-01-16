@@ -34,7 +34,7 @@ $(document).ready( function() {
                         '<input type="hidden" name="Context" value="' + context + '" />' +
                         '<input type="hidden" name="Source" value="' + source + '" />' +
                         '<input type="text" name="Translation" value="' + original + '" />' +
-                        '<input class="ts-translate-store-button" type="button" value="Store" onClick="submit();" />' +
+                        '<input class="ts-translate-store-button" type="submit" value="Store" />' +
                         '<input class="ts-translate-cancel-button" type="button" value="Cancel" />' +
                         '</form>'
                         // Avoid possible surrounding links default behaviour (need to submit form manually)
