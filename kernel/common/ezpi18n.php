@@ -163,11 +163,11 @@ class ezpI18n
                                 }
                                 if ( !isset( $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] ) )
                                 {
-                                    $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] = array("source" => htmlspecialchars( $source ),
+                                    $_SESSION["ts-translate-excluded"][hash( 'md5', $source )] = array( "source" => htmlspecialchars( $source ),
                                                                 "original" => htmlspecialchars( $trans ),
                                                                 "translation" => htmlspecialchars( $translation ),
                                                                 "context" => $context,
-                                                                "comment" => htmlspecialchars( $comment );
+                                                                "comment" => htmlspecialchars( $comment ) );
                                 }
                                 $excluded = true;
                                 break;
