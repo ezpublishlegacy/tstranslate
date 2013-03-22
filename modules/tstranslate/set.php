@@ -155,7 +155,7 @@ if ( $http->hasPostVariable( 'Translation' ) )
 
                     $url = $http->sessionVariable( 'LastAccessesURI' );
                     eZURI::transformURI( $url );
-                    $http->redirect( $url );
+                    $Module->redirectTo( $url );
                 }
                 else
                 {
