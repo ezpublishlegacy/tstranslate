@@ -2,7 +2,7 @@ $(document).ready( function() {
     $(document).data('translationSwitcherOn',false);
 
     $(document).keyup( function(e) {
-        //84 is a code for letter t
+        // 84 is the ascii code for the letter t
         if(e.keyCode == 84 && e.altKey && e.ctrlKey) {
             if (!$(document).data('translationSwitcherOn')){
                 $(document).data('translationSwitcherOn',true);
@@ -20,26 +20,36 @@ $(document).ready( function() {
                         var context = $(this).attr('alt');
                         var source = $(this).attr('title');
                         var original = $(this).attr('original');
-                        // Support for the ezformtoken extension
-                        var _token = '', _tokenNode = document.getElementById( 'ezxform_token_js' );
-                        if ( _tokenNode )
-                        {
-                            _token = _tokenNode.getAttribute( 'title' );
-                        }
 
-                        var action = $("#tstranslate_ezurl").val() == "/" ? "" : $("#tstranslate_ezurl").val();
-
-                        this.innerHTML = "<form action=\"" + action + "/tstranslate/set\" method=\"POST\" style=\"display: inline\" >" + 
-                        '<input type="hidden" name="ezxform_token" value="' + _token + '" />' +
+                        this.innerHTML =
                         '<input type="hidden" name="Context" value="' + context + '" />' +
                         '<input type="hidden" name="Source" value="' + source + '" />' +
                         '<input type="text" name="Translation" value="' + original + '" />' +
-                        '<input class="ts-translate-store-button" type="button" value="Store" onClick="submit();" />' +
-                        '<input class="ts-translate-cancel-button" type="button" value="Cancel" />' +
-                        '</form>'
-                        // Avoid possible surrounding links default behaviour (need to submit form manually)
+                        '<button class="ts-translate-store-button" type="button" />' +
+                        '<button class="ts-translate-cancel-button" type="cancel" />';
+
                         $('.ts-translate-store-button').click( function(evt){
-                            $(this).parent().submit();
+                            var post_data = {
+                                'Context' : context,
+                                'Source' : source,
+                                'Original' : original,
+                                'Translation' : _tstranslatedtext.find('input[name=Translation]').val()
+                            };
+
+                            $.ez( 'TSTranslateSet::ajaxSetTranslation', post_data, function( data ) {
+                                var trans_span = _tstranslatedtext;
+                                if (data.error_text) {
+                                    // Give the ajax error message on failure
+                                    trans_span.html( trans_span.attr( 'translation' ) );
+                                    alert( data.error_text );
+                                } else {
+                                    // Update text on successful result
+                                    trans_span.html( data.content );
+                                    trans_span[0].setAttribute( 'original', data.content );
+                                    trans_span[0].setAttribute( 'translation', data.content );
+                                }
+                                trans_span.data('editMode',false);
+                            });
                             return false;
                         });
                         $('.ts-translate-cancel-button').click( function(evt){
