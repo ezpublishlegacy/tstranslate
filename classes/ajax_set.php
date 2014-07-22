@@ -199,9 +199,9 @@ class TSTranslateSet extends ezjscServerFunctions
 
         $locale_ini = eZINI::instance( $locale . '.ini', 'share/locale' );
         $language = $locale_ini->variable( 'HTTP', 'ContentLanguage' );
-        $language = explode( '-', $language )[0];
+        $language = explode( '-', $language );
 
-        return $language;
+        return $language[0];
     }
 
     public static function getGoogleTranslate( $url )
