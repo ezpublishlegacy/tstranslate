@@ -191,6 +191,67 @@ class TSTranslateSet extends ezjscServerFunctions
 
         return $translation;
     }
+
+    public static function detectCurrentLanguage()
+    {
+        $ini = eZINI::instance( 'site.ini' );
+        $locale = $ini->variable( 'RegionalSettings', 'Locale' );
+
+        $locale_ini = eZINI::instance( $locale . '.ini', 'share/locale' );
+        $language = $locale_ini->variable( 'HTTP', 'ContentLanguage' );
+        $language = explode( '-', $language )[0];
+
+        return $language;
+    }
+
+    public static function getGoogleTranslate( $url )
+    {
+        $ch = curl_init();
+        curl_setopt( $ch, CURLOPT_URL, $url );
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+
+        $result = curl_exec( $ch );
+        $httpCode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+        curl_close( $ch );
+        $response = json_decode( $result );
+
+        if ( $httpCode == '200' )
+        {
+            return $response->data->translations[0]->translatedText;
+        }
+        else
+        {
+            eZDebug::writeError( 'Google Translate: ' . $response->error->message, 'TS Translate Set' );
+            throw new Exception( 'Google Translate: ' . $response->error->message );
+        }
+    }
+
+    public static function ajaxGetTranslateHint()
+    {
+        $ini = eZINI::instance( 'tstranslate.ini' );
+        $api_url = $ini->variable( 'GoogleTranslate', 'GoogleTranslateURL' );
+        if ( empty( $api_url ) )
+        {
+            throw new Exception( 'Missing Google Translate API URL' );
+        }
+        $api_key = $ini->variable( 'GoogleTranslate', 'GoogleApiKey' );
+        if ( empty( $api_key ) )
+        {
+            throw new Exception( 'Missing Google Translate API key' );
+        }
+        $source = $ini->variable( 'GoogleTranslate', 'LanguageFrom' );
+        $target = self::detectCurrentLanguage();
+        if ( empty( $target ) )
+        {
+            throw new Exception( 'Could not detect target language' );
+        }
+
+        $http = eZHTTPTool::instance();
+        $original = $http->postVariable( 'Source' );
+        $url = "$api_url?key=$api_key&q=" . urlencode( $original ) . "&source=$source&target=$target";
+
+        return self::getGoogleTranslate( $url );
+    }
 }
 
 ?>

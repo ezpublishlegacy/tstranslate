@@ -24,9 +24,10 @@ $(document).ready( function() {
                         this.innerHTML =
                         '<input type="hidden" name="Context" value="' + context + '" />' +
                         '<input type="hidden" name="Source" value="' + source + '" />' +
-                        '<input type="text" name="Translation" value="' + original + '" />' +
-                        '<button class="ts-translate-store-button" type="button" />' +
-                        '<button class="ts-translate-cancel-button" type="cancel" />';
+                        '<input style="float: left;" type="text" name="Translation" value="' + original + '" />' +
+                        '<input style="float: left;" title="Save" class="ts-translate-store-button" type="image" src="/extension/tstranslate/design/standard/images/ok.png" />' +
+                        '<input style="float: left;" title="Cancel" class="ts-translate-cancel-button" type="image" src="/extension/tstranslate/design/standard/images/cancel.png" />' +
+                        '<input style="float: left;" title="Suggest from Google Translate" class="ts-translate-google-button" type="image" src="/extension/tstranslate/design/standard/images/book.png" />';
 
                         $('.ts-translate-store-button').click( function(evt){
                             var post_data = {
@@ -56,6 +57,26 @@ $(document).ready( function() {
                             var trans_span = _tstranslatedtext;
                             trans_span.html( trans_span.attr( 'translation' ) );
                             trans_span.data('editMode',false);
+                            return false;
+                        });
+                        $('.ts-translate-google-button').click( function(evt){
+                            var trans_span = _tstranslatedtext;
+                            var post_data = {
+                                'Context' : context,
+                                'Source' : source,
+                                'Original' : original,
+                                'Translation' : _tstranslatedtext.find('input[name=Translation]').val()
+                            };
+                            $.ez( 'TSTranslateSet::ajaxGetTranslateHint', post_data, function( data ) {
+                                var trans_span = _tstranslatedtext;
+                                if (data.error_text) {
+                                    // Give the ajax error message on failure
+                                    alert( data.error_text );
+                                } else {
+                                    // Update text on successful result
+                                    _tstranslatedtext.find('input[name=Translation]')[0].setAttribute( 'value', data.content );
+                                }
+                            } );
                             return false;
                         });
                     }

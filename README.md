@@ -67,3 +67,9 @@ Idea, proof of concept and development: Arne Bakkebø
 Development: Tomasz Madeyski  
 
 For Making Waves, http://www.makingwaves.no
+
+Button icons borrowed from Free Applications Icons by Aha-Soft:  
+[https://www.iconfinder.com/iconsets/freeapplication](https://www.iconfinder.com/iconsets/freeapplication)  
+
+Google Translate API code borrowed from Fishme Google tools by David Hohl:  
+[https://github.com/fishme/fishme_googletools](https://github.com/fishme/fishme_googletools)  

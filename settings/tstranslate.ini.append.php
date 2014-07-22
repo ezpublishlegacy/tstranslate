@@ -48,4 +48,9 @@ ExcludeList[]=design/ezwebin/notification/settings;Apply changes
 # Enable or disable clearing cache after translation file is updated
 TSCacheClean=enabled
 
+[GoogleTranslate]
+GoogleTranslateURL=https://www.googleapis.com/language/translate/v2
+GoogleApiKey=
+LanguageFrom=en
+
 */ ?>
