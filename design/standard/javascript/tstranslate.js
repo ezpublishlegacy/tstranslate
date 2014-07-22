@@ -20,14 +20,15 @@ $(document).ready( function() {
                         var context = $(this).attr('alt');
                         var source = $(this).attr('title');
                         var original = $(this).attr('original');
+                        var root_folder = $("#tstranslate_ezurl").val() == "/" ? "" : $("#tstranslate_ezurl").val();
 
                         this.innerHTML =
                         '<input type="hidden" name="Context" value="' + context + '" />' +
                         '<input type="hidden" name="Source" value="' + source + '" />' +
                         '<input style="float: left;" type="text" name="Translation" value="' + original + '" />' +
-                        '<input style="float: left;" title="Save" class="ts-translate-store-button" type="image" src="/extension/tstranslate/design/standard/images/ok.png" />' +
-                        '<input style="float: left;" title="Cancel" class="ts-translate-cancel-button" type="image" src="/extension/tstranslate/design/standard/images/cancel.png" />' +
-                        '<input style="float: left;" title="Suggest from Google Translate" class="ts-translate-google-button" type="image" src="/extension/tstranslate/design/standard/images/book.png" />';
+                        '<input style="float: left;" title="Save" class="ts-translate-store-button" type="image" src="' + root_folder + '/extension/tstranslate/design/standard/images/ok.png" />' +
+                        '<input style="float: left;" title="Cancel" class="ts-translate-cancel-button" type="image" src="' + root_folder + '/extension/tstranslate/design/standard/images/cancel.png" />' +
+                        '<input style="float: left;" title="Suggest from Google Translate" class="ts-translate-google-button" type="image" src="' + root_folder + '/extension/tstranslate/design/standard/images/book.png" />';
 
                         $('.ts-translate-store-button').click( function(evt){
                             var post_data = {

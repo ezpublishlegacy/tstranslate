@@ -2,6 +2,7 @@
     {def $has_access = fetch( 'user', 'has_access_to', hash( 'module', 'tstranslate',
                                                              'function', 'write' ) )}
     {if $has_access}
+        <input type="hidden" id="tstranslate_ezurl" value={"/"|ezurl()} />
         {ezscript_require( 'tstranslate.js' )}
 
         {def $tsTranslateExcluded = ezhttp( 'ts-translate-excluded' , 'session' )}
